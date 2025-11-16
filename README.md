@@ -9,3 +9,5 @@ Download or copy any individual file directly for local use:
 - `genesis-ai-v7/README.md`
 
 Each file mirrors the ready-to-deploy content so you can pull only what you need.
+
+🔗 **Live demo (update after deployment):** https://your-domain.com/genesis-ai-v7/

@@ -132,6 +132,15 @@ p { margin-bottom: 1rem; color: var(--text-light); }
     align-items: center;
 }
 
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--primary);
+}
+
 .nav-links a {
     text-decoration: none;
     color: var(--text);
@@ -360,6 +369,7 @@ p { margin-bottom: 1rem; color: var(--text-light); }
 
 .team-content {
     padding: 2rem;
+    display: none;
 }
 
 .background {
@@ -684,7 +694,6 @@ p { margin-bottom: 1rem; color: var(--text-light); }
 }
 
 .financial-card {
-    background: linear-gradient(135deg, var(--primary), var (--accent));
     background: linear-gradient(135deg, var(--primary), var(--accent));
     color: white;
     padding: 2rem;
@@ -873,12 +882,29 @@ footer {
     .tax-arrow {
         transform: rotate(90deg);
     }
-    
+
     .case-study-metrics {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
+    .navbar .container {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+
     .nav-links {
-        gap: 1rem;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 0.5rem;
+        display: none;
+        gap: 0.5rem;
+    }
+
+    .nav-links.show {
+        display: flex;
     }
 }

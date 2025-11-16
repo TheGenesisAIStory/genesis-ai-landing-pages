@@ -6,6 +6,14 @@ function scrollTo(elementId) {
     }
 }
 
+// MOBILE NAVIGATION
+function toggleNav() {
+    const nav = document.querySelector('.nav-links');
+    if (nav) {
+        nav.classList.toggle('show');
+    }
+}
+
 // PRODUCT TABS
 let currentTab = 0;
 
@@ -26,8 +34,9 @@ function toggleTeam(index) {
     const cards = document.querySelectorAll('.team-card');
     const card = cards[index];
     const content = card.querySelector('.team-content');
-    
-    content.style.display = content.style.display === 'none' ? 'block' : 'none';
+
+    const isHidden = window.getComputedStyle(content).display === 'none';
+    content.style.display = isHidden ? 'block' : 'none';
 }
 
 // SERVICE CARD TOGGLE
@@ -116,14 +125,6 @@ document.querySelectorAll('.timeline-item, .ecosystem-card, .team-card, .service
     observer.observe(el);
 });
 
-// EXPAND BUTTONS DEFAULT STATE
-document.addEventListener('DOMContentLoaded', function() {
-    const serviceDetails = document.querySelectorAll('.service-details');
-    serviceDetails.forEach(detail => {
-        detail.style.display = 'none';
-    });
-});
-
 // COUNTER ANIMATION
 function animateCounters() {
     const counters = document.querySelectorAll('.stat-number');
@@ -143,5 +144,27 @@ function animateCounters() {
     });
 }
 
-// TRIGGER COUNTERS ON SCROLL
-observer.observe(document.querySelector('.hero'));
+let countersAnimated = false;
+
+const heroObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !countersAnimated) {
+            animateCounters();
+            countersAnimated = true;
+            heroObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+// EXPAND BUTTONS DEFAULT STATE
+document.addEventListener('DOMContentLoaded', function() {
+    const serviceDetails = document.querySelectorAll('.service-details');
+    serviceDetails.forEach(detail => {
+        detail.style.display = 'none';
+    });
+
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) {
+        heroObserver.observe(heroSection);
+    }
+});
